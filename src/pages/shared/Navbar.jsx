@@ -14,7 +14,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <nav className="mx-auto block w-full max-w-screen-xl rounded-xl border border-white/80 bg-white bg-opacity-80 py-2 px-4 text-white shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
+      <nav className="mx-auto block w-full max-w-screen-xl rounded-xl border border-white/80 bg-white bg-opacity-80 py-2 px-4 text-white shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4 z-10">
         <div>
           {/* Desktop design */}
           <div className="container mx-auto flex items-center justify-between text-gray-900">
@@ -25,7 +25,7 @@ const Navbar = () => {
               {navLinks}
               <button
                 onClick={() => navigate("/login")}
-                className="hidden rounded-lg bg-gradient-to-tr from-pink-500 to-pink-400 py-2 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+                className="hidden rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-2 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
                 type="button"
                 data-ripple-light="true"
               >
@@ -64,7 +64,7 @@ const Navbar = () => {
               </ul>
               <button
                 onClick={() => navigate("/login")}
-                className="block w-full rounded-lg bg-gradient-to-tr from-pink-500 to-pink-400 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                className="block w-full rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button"
                 data-ripple-light="true"
               >
