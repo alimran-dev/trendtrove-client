@@ -5,8 +5,10 @@ import Footer from "../pages/shared/Footer";
 const Root = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <div className="h-full flex-grow -z-10">
+      <div className="z-10">
+        <Navbar />
+      </div>
+      <div className="h-full flex-grow">
         <Outlet />
       </div>
       <Footer />
