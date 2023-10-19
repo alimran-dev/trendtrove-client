@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
 import { AiTwotoneStar } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  const { name, brand, price, type, rating, photo } = product;
+    const {_id, name, brand, price, type, rating, photo } = product;
+    const navigate = useNavigate();
   console.log(product);
   return (
     <div>
@@ -35,10 +37,10 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
         <div className="flex justify-around p-6 pt-0">
-          <button className="block w-1/3 rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+          <button onClick={()=>navigate(`/details/${_id}`)} className="block w-1/3 rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             Details
           </button>
-          <button className="block w-1/3 rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+          <button onClick={()=>navigate(`/update/${_id}`)} className="block w-1/3 rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             Update
           </button>
         </div>
