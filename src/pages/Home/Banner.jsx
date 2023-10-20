@@ -12,7 +12,7 @@ const Banner = () => {
     <div>
       <div
         style={bgStyle}
-        className="w-full lg:h-[550px] bg-pink-950 flex flex-col md:flex-row justify-around relative px-7 md:px-12 lg:px-16 rounded-md"
+        className="w-full md:h-[400px] lg:h-[550px] bg-pink-950 flex flex-col md:flex-row justify-around relative px-7 md:px-12 lg:px-16 rounded-md"
       >
         <div className="flex-1 flex flex-col justify-center gap-5 py-10 text-center md:text-left">
           <h1 className="text-3xl lg:text-5xl font-bold text-white">
