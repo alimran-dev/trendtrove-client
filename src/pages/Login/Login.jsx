@@ -1,18 +1,54 @@
+import { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
-    const handleLogin = e => {
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email,password)
+  const [error, setError] = useState(null);
+  const { loginUser, setUser, googleLogin } = useContext(AuthContext);
+  const { state } = useLocation();
+  const navigate = useNavigate();
 
-    }
-    return (
-        <div>
-            <form onSubmit={handleLogin}>
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    setError(null);
+    loginUser(email, password)
+      .then((result) => {
+        setUser(result.user);
+        if (state) {
+          navigate(state);
+        } else {
+          navigate("/");
+        }
+        console.log(result.user);
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.error(error);
+      });
+  };
+  const handleGoogle = () => {
+    setError(null);
+    googleLogin()
+      .then((result) => {
+        setUser(result.user);
+        if (state) {
+          navigate(state);
+        } else {
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+        console.error(error);
+      });
+  };
+  return (
+    <div>
+      <form onSubmit={handleLogin}>
         <div className="relative flex flex-col text-gray-700 bg-white shadow-md md:w-96 rounded-xl bg-clip-border mx-auto my-20">
           <div className="relative grid mx-4 mb-4 -mt-6 overflow-hidden text-white shadow-lg h-28 place-items-center rounded-xl bg-gradient-to-tr from-pink-700 to-pink-500 bg-clip-border shadow-pink-500/40">
             <h3 className="block font-sans text-3xl antialiased font-semibold leading-snug tracking-normal text-white">
@@ -40,50 +76,15 @@ const Login = () => {
                 Password
               </label>
             </div>
-            <div className="-ml-2.5">
-              <div className="inline-flex items-center">
-                <label
-                  className="relative flex items-center p-3 rounded-full cursor-pointer"
-                  htmlFor="checkbox"
-                  data-ripple-dark="true"
-                >
-                  <input
-                    type="checkbox"
-                    name="terms"
-                    className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-pink-500 checked:bg-pink-500 checked:before:bg-pink-500 hover:before:opacity-10"
-                    id="checkbox"
-                  />
-                  <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-3.5 w-3.5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      stroke="currentColor"
-                      strokeWidth="1"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </span>
-                </label>
-                <label
-                  className="mt-px font-light text-gray-700 cursor-pointer select-none"
-                  htmlFor="checkbox"
-                >
-                  Accept our{" "}
-                  <Link to={"/"} className="text-pink-600 font-medium">
-                    terms and conditions
-                  </Link>{" "}
-                  .
-                </label>
-              </div>
-            </div>
           </div>
           <div className="p-6 pt-0">
+            {error ? (
+              <p className="text-center text-lg text-pink-600 font-medium pb-2">
+                {error}
+              </p>
+            ) : (
+              <></>
+            )}
             <button
               className="block w-full select-none rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-3 px-6 text-center align-middle font-sans font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="submit"
@@ -91,15 +92,19 @@ const Login = () => {
             >
               Login
             </button>
-            <p className="flex items-center justify-center gap-1.5 border-2 border-pink-600 py-1.5 my-2 rounded-lg hover:cursor-pointer hover:shadow-md hover:shadow-pink-500/40">
+            <button
+              onClick={handleGoogle}
+              className="w-full flex items-center justify-center gap-1.5 border-2 border-pink-600 py-1.5 my-2 rounded-lg hover:cursor-pointer hover:shadow-md hover:shadow-pink-500/40"
+            >
               <span className="text-pink-700 uppercase font-medium">
                 Login with Gmail
               </span>
               <FcGoogle className="text-2xl" />
-            </p>
+            </button>
             <p className="flex justify-center mt-6 font-sans text-sm antialiased font-light leading-normal text-inherit">
               Already have an account?
               <Link
+                state={state}
                 to={"/register"}
                 className="block ml-1 font-sans text-sm antialiased font-bold leading-normal text-pink-500"
               >
@@ -109,8 +114,8 @@ const Login = () => {
           </div>
         </div>
       </form>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Login;

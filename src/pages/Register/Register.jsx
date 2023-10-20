@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -7,6 +7,7 @@ import auth from "../../firebase/firebase.config";
 const Register = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { state } = useLocation();
   const { registerUser, setUser, googleLogin, updateUser } =
     useContext(AuthContext);
   const handleRegister = (e) => {
@@ -17,7 +18,6 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const terms = form.terms.checked;
-    console.log(name, photo, email, password, terms);
     setError(null);
     if (terms) {
       if (/^.{6,}$/.test(password)) {
@@ -28,12 +28,16 @@ const Register = () => {
                 console.log(result.user);
                 updateUser(name, photo)
                   .then(() => {
-                    navigate("/");
                     setUser(auth.currentUser);
+                    if (state) {
+                      navigate(state);
+                    } else {
+                      navigate("/");
+                    }
                   })
                   .catch((error) => {
                     setError(error.message);
-                    console.log(error);
+                    console.error(error);
                   });
               })
               .catch((error) => {
@@ -57,8 +61,12 @@ const Register = () => {
     setError(null);
     googleLogin()
       .then((result) => {
-        navigate("/");
         setUser(result.user);
+        if (state) {
+          navigate(state);
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         setError(error.message);
