@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const AddProduct = () => {
   const handleAdd = (e) => {
     e.preventDefault();
@@ -11,6 +13,25 @@ const AddProduct = () => {
     const description = form.description.value;
     const product = { name, brand, price, type, rating, photo, description };
     console.log(product);
+    fetch("https://brand-shop-server-xi.vercel.app/products", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Product added successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        form.reset();
+        console.log(data);
+      });
   };
   return (
     <div className="px-10 md:px-14 lg:px-20 py-8 space-y-10">
