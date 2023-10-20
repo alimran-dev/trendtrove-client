@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiTwotoneStar } from "react-icons/ai";
+import Swal from "sweetalert2";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -14,6 +15,27 @@ const ProductDetails = () => {
         setProduct(productData);
       });
   }, []);
+  const handleCart = () => {
+    const cartProduct = { name, brand, price, type, rating, photo, description };
+    fetch("https://brand-shop-server-xi.vercel.app/cart", {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(cartProduct),
+    })
+    .then(res=>res.json())
+      .then(data => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Added to cart successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      console.log(data)
+    })
+  }
   console.log(product);
   return (
     <div className="my-10">
@@ -45,6 +67,7 @@ const ProductDetails = () => {
           </p>
           <a className="inline-block" href="#">
             <button
+              onClick={() => handleCart()}
               className="block w-full rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
             >

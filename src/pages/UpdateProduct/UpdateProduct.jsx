@@ -1,7 +1,21 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateProduct = () => {
   const { id } = useParams();
+  const [data, setData] = useState(null);
+  const [product] = data || [];
+  const { name, brand, price, type, rating, photo, description } =
+    product || {};
+  useEffect(() => {
+    fetch(`https://brand-shop-server-xi.vercel.app/product/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      });
+  }, []);
+  console.log(product);
   const handleUpdate = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -14,10 +28,29 @@ const UpdateProduct = () => {
     const description = form.description.value;
     const product = { name, brand, price, type, rating, photo, description };
     console.log(product);
+    fetch(`https://brand-shop-server-xi.vercel.app/product/${id}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(product),
+    })
+    .then(res=>res.json())
+      .then(data => {
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Product updated successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+      }
+    })
   };
   return (
     <div className="px-10 md:px-14 lg:px-20 py-8 space-y-10">
-      <h1 className="text-4xl font-bold text-center bg-gradient-to-t from-pink-700 to-pink-300 bg-clip-text text-transparent py-1">
+      <h1 className="text-3xl md:text-4xl font-bold text-center bg-gradient-to-t from-pink-700 to-pink-300 bg-clip-text text-transparent py-1">
         Update a Product
       </h1>
       <form onSubmit={handleUpdate} className="space-y-2">
@@ -31,6 +64,7 @@ const UpdateProduct = () => {
               <input
                 type="text"
                 name="name"
+                defaultValue={name}
                 placeholder="Enter Product Name"
                 className="w-full py-2 px-3 rounded-md focus:outline-pink-600"
                 id=""
@@ -43,6 +77,7 @@ const UpdateProduct = () => {
               <input
                 type="text"
                 name="brand"
+                defaultValue={brand}
                 placeholder="Enter Brand Name"
                 className="w-full py-2 px-3 rounded-md focus:outline-pink-600"
                 id=""
@@ -55,6 +90,7 @@ const UpdateProduct = () => {
               <input
                 type="text"
                 name="price"
+                defaultValue={price}
                 placeholder="Enter Product Price"
                 className="w-full py-2 px-3 rounded-md focus:outline-pink-600"
                 id=""
@@ -72,6 +108,7 @@ const UpdateProduct = () => {
                 className="w-full py-2 px-3 rounded-md focus:outline-pink-600"
                 id=""
               >
+                <option value={type}>{type}</option>
                 <option value={"Kids and Baby Clothing"}>
                   Kids and Baby Clothing
                 </option>
@@ -89,6 +126,7 @@ const UpdateProduct = () => {
               <input
                 type="text"
                 name="rating"
+                defaultValue={rating}
                 placeholder="Enter Product Rating"
                 className="w-full py-2 px-3 rounded-md focus:outline-pink-600"
                 id=""
@@ -101,6 +139,7 @@ const UpdateProduct = () => {
               <input
                 type="text"
                 name="photo"
+                defaultValue={photo}
                 placeholder="Enter Photo URL"
                 className="w-full py-2 px-3 rounded-md focus:outline-pink-600"
                 id=""
@@ -115,6 +154,7 @@ const UpdateProduct = () => {
           <input
             type="text"
             name="description"
+            defaultValue={description}
             placeholder="Enter Short Description..."
             className="w-full py-2 px-3 rounded-md focus:outline-pink-600"
             id=""

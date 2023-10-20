@@ -18,9 +18,30 @@ const Navbar = () => {
   };
   const navLinks = (
     <>
-      <NavLink to={"/"}>Home</NavLink>
-      <NavLink to={"/addProduct"}>Add Product</NavLink>
-      <NavLink to={"/cart"}>My Cart</NavLink>
+      <NavLink
+        to={"/"}
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "border-b-2 border-pink-600" : ""
+        }
+      >
+        Home
+      </NavLink>
+      <NavLink
+        to={"/addProduct"}
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "border-b-2 border-pink-600" : ""
+        }
+      >
+        Add Product
+      </NavLink>
+      <NavLink
+        to={"/cart"}
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "border-b-2 border-pink-600" : ""
+        }
+      >
+        My Cart
+      </NavLink>
     </>
   );
   return (
