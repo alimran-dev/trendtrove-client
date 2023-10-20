@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
-  const { name, brand, price, type, rating, photo, description } = product;
+  const { name, brand, price, type, rating, photo, description } = product || {};
   useEffect(() => {
     fetch(`https://brand-shop-server-xi.vercel.app/product/${id}`)
       .then((res) => res.json())
@@ -36,7 +36,7 @@ const ProductDetails = () => {
       console.log(data)
     })
   }
-  console.log(product);
+  console.log(id);
   return (
     <div className="my-10">
       <div className="relative flex flex-col lg:flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">

@@ -35,7 +35,7 @@ const Cart = () => {
   return (
     <div>
       <h1 className="text-4xl font-bold text-center bg-gradient-to-t from-pink-700 to-pink-300 bg-clip-text text-transparent py-1 my-4">
-        Your Cart
+        My Cart
       </h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center">
         {carts?.map((cart) => (
