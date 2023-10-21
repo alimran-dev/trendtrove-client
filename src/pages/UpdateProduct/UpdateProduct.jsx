@@ -29,24 +29,24 @@ const UpdateProduct = () => {
     const product = { name, brand, price, type, rating, photo, description };
     console.log(product);
     fetch(`https://brand-shop-server-xi.vercel.app/product/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       body: JSON.stringify(product),
     })
-    .then(res=>res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.modifiedCount > 0) {
           Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Product updated successfully',
+            position: "center",
+            icon: "success",
+            title: "Product updated successfully",
             showConfirmButton: false,
-            timer: 1500
-          })
-      }
-    })
+            timer: 1500,
+          });
+        }
+      });
   };
   return (
     <div className="px-10 md:px-14 lg:px-20 py-8 space-y-10">
@@ -74,14 +74,19 @@ const UpdateProduct = () => {
               <label htmlFor="brand" className="block text-xl font-semibold">
                 Brand
               </label>
-              <input
-                type="text"
+              <select
                 name="brand"
-                defaultValue={brand}
-                placeholder="Enter Brand Name"
                 className="w-full py-2 px-3 rounded-md focus:outline-pink-600"
                 id=""
-              />
+              >
+                <option value={brand}>{brand}</option>
+                <option value={"Adidas"}>Adidas</option>
+                <option value={"Gucci"}>Gucci</option>
+                <option value={"Zara"}>Zara</option>
+                <option value={"H&M"}>H&M</option>
+                <option value={"Levi's"}>Levi&apos;s</option>
+                <option value={"Nike"}>Nike</option>
+              </select>
             </div>
             <div className="space-y-2">
               <label htmlFor="price" className="block text-xl font-semibold">

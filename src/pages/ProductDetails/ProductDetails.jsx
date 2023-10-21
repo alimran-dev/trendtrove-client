@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiTwotoneStar } from "react-icons/ai";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const ProductDetails = () => {
+  const {user} = useContext(AuthContext);
   const [product, setProduct] = useState({});
   const { id } = useParams();
   const { name, brand, price, type, rating, photo, description } = product || {};
@@ -16,7 +18,8 @@ const ProductDetails = () => {
       });
   }, []);
   const handleCart = () => {
-    const cartProduct = { name, brand, price, type, rating, photo, description };
+    const email = user.email;
+    const cartProduct = { email, name, brand, price, type, rating, photo, description };
     fetch("https://brand-shop-server-xi.vercel.app/cart", {
       method: 'POST',
       headers: {

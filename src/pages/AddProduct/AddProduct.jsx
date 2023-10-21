@@ -58,13 +58,18 @@ const AddProduct = () => {
               <label htmlFor="brand" className="block text-xl font-semibold">
                 Brand
               </label>
-              <input
-                type="text"
+              <select
                 name="brand"
-                placeholder="Enter Brand Name"
                 className="w-full py-2 px-3 rounded-md focus:outline-pink-600"
                 id=""
-              />
+              >
+                <option value={"Adidas"}>Adidas</option>
+                <option value={"Gucci"}>Gucci</option>
+                <option value={"Zara"}>Zara</option>
+                <option value={"H&M"}>H&M</option>
+                <option value={"Levi's"}>Levi&apos;s</option>
+                <option value={"Nike"}>Nike</option>
+              </select>
             </div>
             <div className="space-y-2">
               <label htmlFor="price" className="block text-xl font-semibold">

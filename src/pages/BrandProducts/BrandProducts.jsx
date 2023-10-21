@@ -93,6 +93,14 @@ const BrandProducts = () => {
       <h1 className="text-4xl font-bold text-center bg-gradient-to-t from-pink-700 to-pink-300 bg-clip-text text-transparent py-1 my-4">
         Products from {brand}
       </h1>
+      {products?.length === 0 && (
+        <div className="w-full h-[70vh] flex items-center justify-center">
+          {" "}
+          <p className=" text-3xl font-bold text-center py-1 my-4">
+            No products available now!
+          </p>
+        </div>
+      )}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center">
         {products?.map((product) => (
           <ProductCard key={product._id} product={product} />
