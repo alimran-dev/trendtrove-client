@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiTwotoneStar } from "react-icons/ai";

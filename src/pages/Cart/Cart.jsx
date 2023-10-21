@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import CartProduct from "./CartProduct";
 import Swal from "sweetalert2";
