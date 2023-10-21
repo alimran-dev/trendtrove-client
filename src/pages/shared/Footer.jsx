@@ -1,23 +1,38 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 const Footer = () => {
+  const { isDark } = useContext(AuthContext);
   return (
     <div>
-      <footer className="bg-white">
+      <footer>
         <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
         <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           <div className="md:flex md:justify-between">
-            <div className="mb-6 md:mb-0">
+            <div
+              className={`mb-6 md:mb-0 ${
+                isDark ? "bg-gray-300 rounded-xl" : ""
+              }`}
+            >
               <Link to={"/"} className="flex items-center">
                 <img src={logo} alt="Logo" />
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                <h2
+                  className={`mb-6 text-sm font-semibold uppercase ${
+                    isDark ? "text-gray-400" : "text-gray-900"
+                  }`}
+                >
                   Quick Links
                 </h2>
-                <ul className="text-gray-500 font-medium">
+                <ul
+                  className={`font-medium ${
+                    isDark ? "text-gray-200" : "text-gray-500"
+                  }`}
+                >
                   <li className="mb-4">
                     <Link to={"/"} className="hover:underline">
                       Home
@@ -31,10 +46,18 @@ const Footer = () => {
                 </ul>
               </div>
               <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                <h2
+                  className={`mb-6 text-sm font-semibold uppercase ${
+                    isDark ? "text-gray-400" : "text-gray-900"
+                  }`}
+                >
                   Follow us
                 </h2>
-                <ul className="text-gray-500 font-medium">
+                <ul
+                  className={`font-medium ${
+                    isDark ? "text-gray-200" : "text-gray-500"
+                  }`}
+                >
                   <li className="mb-4">
                     <Link to={"#"} className="hover:underline ">
                       Github
@@ -48,10 +71,18 @@ const Footer = () => {
                 </ul>
               </div>
               <div>
-                <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
+                <h2
+                  className={`mb-6 text-sm font-semibold uppercase ${
+                    isDark ? "text-gray-400" : "text-gray-900"
+                  }`}
+                >
                   Legal
                 </h2>
-                <ul className="text-gray-500 font-medium">
+                <ul
+                  className={`font-medium ${
+                    isDark ? "text-gray-200" : "text-gray-500"
+                  }`}
+                >
                   <li className="mb-4">
                     <Link to={"#"} className="hover:underline">
                       Privacy Policy
@@ -68,7 +99,11 @@ const Footer = () => {
           </div>
           <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
           <div className="sm:flex flex-col md:flex-row sm:items-center sm:justify-between text-center">
-            <span className="block text-sm text-gray-500 sm:text-center">
+            <span
+              className={`block text-sm sm:text-center ${
+                isDark ? "text-gray-300" : "text-gray-500"
+              }`}
+            >
               © 2023{" "}
               <Link href="https://flowbite.com/" className="hover:underline">
                 TrendTrove™
@@ -76,7 +111,12 @@ const Footer = () => {
               . All Rights Reserved.
             </span>
             <div className="flex mt-4 space-x-5 justify-center sm:mt-0">
-              <Link to="#" className="text-gray-500 hover:text-gray-900">
+              <Link
+                to="#"
+                className={`hover:text-gray-900 ${
+                  isDark ? "text-gray-300" : "text-gray-500"
+                }`}
+              >
                 <svg
                   className="w-4 h-4"
                   aria-hidden="true"
@@ -92,7 +132,12 @@ const Footer = () => {
                 </svg>
                 <span className="sr-only">Facebook page</span>
               </Link>
-              <Link to="#" className="text-gray-500 hover:text-gray-900">
+              <Link
+                to="#"
+                className={`hover:text-gray-900 ${
+                  isDark ? "text-gray-300" : "text-gray-500"
+                }`}
+              >
                 <svg
                   className="w-4 h-4"
                   aria-hidden="true"
@@ -104,7 +149,12 @@ const Footer = () => {
                 </svg>
                 <span className="sr-only">Discord community</span>
               </Link>
-              <Link to="#" className="text-gray-500 hover:text-gray-900">
+              <Link
+                to="#"
+                className={`hover:text-gray-900 ${
+                  isDark ? "text-gray-300" : "text-gray-500"
+                }`}
+              >
                 <svg
                   className="w-4 h-4"
                   aria-hidden="true"
@@ -120,7 +170,12 @@ const Footer = () => {
                 </svg>
                 <span className="sr-only">Twitter page</span>
               </Link>
-              <Link to="#" className="text-gray-500 hover:text-gray-900">
+              <Link
+                to="#"
+                className={`hover:text-gray-900 ${
+                  isDark ? "text-gray-300" : "text-gray-500"
+                }`}
+              >
                 <svg
                   className="w-4 h-4"
                   aria-hidden="true"

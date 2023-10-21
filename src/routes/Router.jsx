@@ -12,44 +12,60 @@ import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Root />,
-        errorElement: <ErrorPage/>,
-        children: [
-            {
-                path: '/',
-                element: <Home/>
-            },
-            {
-                path: '/addProduct',
-                element: <PrivateRoute><AddProduct/></PrivateRoute>,
-            },
-            {
-                path: '/products/:brand',
-                element: <BrandProducts/>,
-            },
-            {
-                path: '/details/:id',
-                element: <PrivateRoute><ProductDetails/></PrivateRoute>,
-            },
-            {
-                path: '/update/:id',
-                element: <PrivateRoute><UpdateProduct/></PrivateRoute>,
-            },
-            {
-                path: '/cart',
-                element: <PrivateRoute><Cart/></PrivateRoute>,
-            },
-            {
-                path: 'login',
-                element: <Login/>,
-            },
-            {
-                path: '/register',
-                element: <Register/>,
-            }
-        ]
-    }
-])
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/addProduct",
+        element: (
+          <PrivateRoute>
+            <AddProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/products/:brand",
+        element: <BrandProducts />,
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivateRoute>
+            <ProductDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/cart",
+        element: (
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+    ],
+  },
+]);
 export default router;

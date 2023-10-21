@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BrandCard from "./BrandCard";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Brands = () => {
   const [brands, setBrands] = useState();
+  const { isDark } = useContext(AuthContext);
   useEffect(() => {
     fetch("https://brand-shop-server-xi.vercel.app/brands")
       .then((res) => res.json())
@@ -14,7 +16,11 @@ const Brands = () => {
       <h1 className="text-4xl font-bold text-center bg-gradient-to-t from-pink-700 to-pink-300 bg-clip-text text-transparent py-1">
         Shop by Your Favorite Brands
       </h1>
-      <p className="text-center md:w-2/3 mx-auto">
+      <p
+        className={`text-center md:w-2/3 mx-auto ${
+          isDark ? "text-gray-300" : ""
+        }`}
+      >
         Explore our diverse range of premium brands, each offering a distinctive
         blend of style and quality. Click on the brand logos below to shop a
         wide selection of products from your favorite designers. From timeless

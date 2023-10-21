@@ -8,6 +8,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const ProductDetails = () => {
   const {user} = useContext(AuthContext);
   const [product, setProduct] = useState({});
+  const { isDark } = useContext(AuthContext);
   const { id } = useParams();
   const { name, brand, price, type, rating, photo, description } = product || {};
   useEffect(() => {
@@ -42,9 +43,9 @@ const ProductDetails = () => {
   }
   console.log(id);
   return (
-    <div className="my-10">
-      <div className="relative flex flex-col lg:flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-        <div className="relative lg:w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-r-none shrink-0 rounded-xl bg-clip-border">
+    <div className={`my-10 ${isDark?"bg-gray-700 text-gray-300":"bg-white text-gray-700"}`}>
+      <div className="relative flex flex-col lg:flex-row rounded-xl bg-clip-border shadow-md">
+        <div className={`relative lg:w-2/5 m-0 overflow-hidden text-gray-700 rounded-r-none shrink-0 rounded-xl bg-clip-border ${isDark?"bg-gray-300":"bg-white"}`}>
           <img src={photo} alt="image" className="w-full h-full" />
         </div>
         <div className="p-6">

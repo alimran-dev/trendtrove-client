@@ -2,10 +2,13 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { BiSolidSun } from "react-icons/bi";
+import { BsFillMoonStarsFill } from "react-icons/bs";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
-  const { user, logoutUser, setUser } = useContext(AuthContext);
+  const { user, logoutUser, setUser, isDark, setIsDark } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const handleLogout = () => {
     logoutUser()
@@ -46,15 +49,34 @@ const Navbar = () => {
   );
   return (
     <div>
-      <nav className="mx-auto block w-full max-w-screen-xl rounded-xl border border-white/80 bg-white bg-opacity-80 py-2 px-4 text-white shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4 z-10">
+      <nav
+        className={`mx-auto block w-full max-w-screen-xl rounded-xl border  bg-opacity-80 py-2 px-4 shadow-md backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4 z-10 ${
+          isDark ? "bg-gray-700 border-white/40" : "bg-white border-white/80"
+        }`}
+      >
         <div>
           {/* Desktop design */}
           <div className="container mx-auto flex items-center justify-between text-gray-900">
-            <Link to={"/"} className="mr-4 block cursor-pointer h-14">
+            <Link
+              to={"/"}
+              className={`mr-4 block cursor-pointer h-14 ${
+                isDark ? "bg-gray-300 rounded-xl" : ""
+              }`}
+            >
               <img src={logo} alt="" className="h-full" />
             </Link>
-            <ul className="hidden items-center gap-6 lg:flex md:text-lg font-medium">
+            <ul
+              className={`hidden items-center gap-6 lg:flex md:text-lg font-medium ${
+                isDark ? "text-gray-300" : ""
+              }`}
+            >
               {navLinks}
+              <span
+                onClick={() => setIsDark(!isDark)}
+                className="text-2xl hover:cursor-pointer"
+              >
+                {isDark ? <BiSolidSun /> : <BsFillMoonStarsFill />}
+              </span>
               {user ? (
                 <>
                   <span className="ml-5 text-pink-600">
@@ -67,7 +89,9 @@ const Navbar = () => {
                   />
                   <button
                     onClick={handleLogout}
-                    className="hidden rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-2 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+                    className={`hidden rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-2 px-4 font-sans text-base font-bold uppercase shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block ${
+                      isDark ? "text-gray-300" : "text-white"
+                    }`}
                     type="button"
                     data-ripple-light="true"
                   >
@@ -78,7 +102,9 @@ const Navbar = () => {
                 <>
                   <button
                     onClick={() => navigate("/login")}
-                    className="hidden rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-2 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
+                    className={`hidden rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-2 px-4 font-sans text-base font-bold uppercase shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block ${
+                      isDark ? "text-gray-300" : "text-white"
+                    }`}
                     type="button"
                     data-ripple-light="true"
                   >
@@ -88,6 +114,12 @@ const Navbar = () => {
               )}
             </ul>
             <div className="flex items-center gap-3 lg:hidden">
+              <span
+                onClick={() => setIsDark(!isDark)}
+                className="text-2xl hover:cursor-pointer"
+              >
+                {isDark ? <BiSolidSun /> : <BsFillMoonStarsFill />}
+              </span>
               {user && (
                 <div className="flex gap-2 items-center">
                   <span className="font-medium text-pink-600">
@@ -123,18 +155,24 @@ const Navbar = () => {
             </div>
           </div>
           <div
-            className={`block absolute top-14 right-8 w-36 bg-white border-2 border-gray-400 rounded-lg p-2 basis-full overflow-hidden lg:hidden ${
+            className={`block absolute top-14 right-8 w-36 border-2 border-gray-400 rounded-lg p-2 basis-full overflow-hidden lg:hidden ${
               isOpen ? "visible" : "invisible"
-            }`}
+            } ${isDark ? "bg-gray-800" : "bg-white"}`}
           >
             <div className="container mx-auto pb-2">
-              <ul className="mt-2 mb-2 flex flex-col items-center gap-0.5 text-black font-medium ">
+              <ul
+                className={`mt-2 mb-2 flex flex-col items-center gap-0.5 font-medium ${
+                  isDark ? "text-gray-300" : "text-black"
+                }`}
+              >
                 {navLinks}
               </ul>
               {user ? (
                 <button
                   onClick={handleLogout}
-                  className="block w-full rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  className={`block w-full rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ${
+                    isDark ? "text-gray-300" : "text-white"
+                  }`}
                   type="button"
                   data-ripple-light="true"
                 >
@@ -143,7 +181,9 @@ const Navbar = () => {
               ) : (
                 <button
                   onClick={() => navigate("/login")}
-                  className="block w-full rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  className={`block w-full rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ${
+                    isDark ? "text-gray-300" : "text-white"
+                  }`}
                   type="button"
                   data-ripple-light="true"
                 >

@@ -1,14 +1,19 @@
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import { AiTwotoneStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const ProductCard = ({ product }) => {
     const {_id, name, brand, price, type, rating, photo } = product;
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { isDark } = useContext(AuthContext);
   console.log(product);
   return (
     <div>
-      <div className="relative flex flex-col text-gray-700 bg-white shadow-md w-96 rounded-xl bg-clip-border">
+      <div className={`relative flex flex-col shadow-md lg:w-96 rounded-xl bg-clip-border ${
+        isDark ? "bg-gray-700 text-gray-300" : "bg-white text-gray-700"
+      }`}>
         <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white h-60 rounded-xl bg-clip-border">
           <img src={photo} className="w-full h-full" />
         </div>
@@ -37,10 +42,14 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
         <div className="flex justify-around p-6 pt-0">
-          <button onClick={()=>navigate(`/details/${_id}`)} className="block w-1/3 rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+          <button onClick={()=>navigate(`/details/${_id}`)} className={`block rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 mx-auto py-2 px-5 font-sans text-base font-bold uppercase shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ${
+            isDark ? "text-gray-200" : "text-white"
+          }`}>
             Details
           </button>
-          <button onClick={()=>navigate(`/update/${_id}`)} className="block w-1/3 rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 py-1.5 px-4 font-sans text-base font-bold uppercase text-white shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+          <button onClick={()=>navigate(`/update/${_id}`)} className={`block rounded-lg bg-gradient-to-tr from-pink-700 to-pink-500 mx-auto py-2 px-5 font-sans text-base font-bold uppercase shadow-md shadow-pink-500/20 hover:shadow-lg hover:shadow-pink-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ${
+            isDark ? "text-gray-200" : "text-white"
+          }`}>
             Update
           </button>
         </div>

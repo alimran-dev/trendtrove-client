@@ -7,6 +7,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const Cart = () => {
   const { user } = useContext(AuthContext);
   const [carts, setCarts] = useState(null);
+  const { isDark } = useContext(AuthContext);
   useEffect(() => {
     fetch(`https://brand-shop-server-xi.vercel.app/cart/${user.email}`)
       .then((res) => res.json())
@@ -43,7 +44,7 @@ const Cart = () => {
       {carts?.length === 0 && (
         <div className="w-full h-[70vh] flex items-center justify-center">
           {" "}
-          <p className=" text-3xl font-bold text-center py-1 my-4">
+          <p className={`text-3xl font-bold text-center py-1 my-4 ${isDark?"text-gray-300":""}`}>
             No Items in Cart
           </p>
         </div>
